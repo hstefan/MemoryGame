@@ -1,0 +1,10 @@
+#include <SDL2/SDL.h>
+#include "Game.hpp"
+
+int main(int argc, char** argv) {
+	game::Game g;
+	g.run();
+
+	SDL_Quit();
+	return 0;
+}

@@ -1,0 +1,10 @@
+*.user
+*.suo
+*.opensdf
+*.sdf
+*.db
+/Debug
+/Release
+/tests
+*.swp
+/downloads
