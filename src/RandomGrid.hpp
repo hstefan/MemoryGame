@@ -12,6 +12,8 @@ struct RandomGrid {
 	inline T& get(int i, int j);
 	inline const T& get(int i, int j) const;
 	void feed(size_t sx, size_t sy);
+	size_t width() const;
+	size_t height() const;
 private:
 	std::vector<T> _data;
 	size_t _sx, _sy;
@@ -57,6 +59,16 @@ void RandomGrid<T>::feed(size_t sx, size_t sy) {
 	for (size_t i = 0; i < indices.size(); ++i) {
 		_data.push_back(data[indices[i]]);
 	}
+}
+
+template <class T>
+size_t RandomGrid<T>::width() const {
+	return _sx;
+}
+
+template <class T>
+size_t RandomGrid<T>::height() const {
+	return _sy;
 }
 
 }
