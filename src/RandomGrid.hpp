@@ -11,8 +11,7 @@ struct RandomGrid {
 	virtual ~RandomGrid();
 	inline T& get(int i, int j);
 	inline const T& get(int i, int j) const;
-	template <class Con>
-	void feed(size_t sx, size_t sy, const Con& data);
+	void feed(size_t sx, size_t sy);
 private:
 	std::vector<T> _data;
 	size_t _sx, _sy;
@@ -39,15 +38,19 @@ const T& RandomGrid<T>::get(int i, int j) const {
 }
 
 template <class T>
-template <class Con>
-void RandomGrid<T>::feed(size_t sx, size_t sy, const Con& data) {
+void RandomGrid<T>::feed(size_t sx, size_t sy) {
 	_data.clear();
 	_sx = sx;
 	_sy = sy;
 	_data.reserve(sx * sy);
 	std::vector<size_t> indices;
+	std::vector<size_t> data;
 	for (size_t i = 0; i < sx * sy; ++i) {
 		indices.push_back(i);
+		if (i < sx * sy) {
+			data.push_back(i);
+			data.push_back(i);
+		}
 	}
 	std::random_shuffle(std::begin(indices), std::end(indices));
 	
