@@ -31,12 +31,12 @@ RandomGrid<T>::~RandomGrid() {
 
 template <class T>
 T& RandomGrid<T>::get(int i, int j) {
-	return _data[i * sx + j];
+	return _data[j * _sx + i];
 }
 
 template <class T>
 const T& RandomGrid<T>::get(int i, int j) const {
-	return _data[i * sx + j];
+	return _data[j * _sx + i];
 }
 
 template <class T>
