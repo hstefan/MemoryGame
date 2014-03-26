@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GridDisplay.hpp"
+
 struct SDL_Window;
 struct SDL_Renderer;
 union SDL_Event;
@@ -21,6 +23,7 @@ private:
 
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
+	graphics::GridDisplay<RandomGrid<int>> _display;
 };
 
 }

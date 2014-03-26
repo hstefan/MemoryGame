@@ -2,17 +2,22 @@
 
 #include "Game.hpp"
 #include "util.hpp"
+#include "RandomGrid.hpp"
 
 using namespace game;
 
 Game::Game() 
-	: _window(nullptr), _renderer(nullptr) {
+	: _window(nullptr), _renderer(nullptr), _display() {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	_window = SDL_CreateWindow("Memory Game",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WIDTH, HEIGHT,
 		SDL_WINDOW_OPENGL);
 	_renderer = SDL_CreateRenderer(_window, -1, 0);
+	
+	RandomGrid<int> grid;
+	grid.feed(8, 6);
+	_display.feed(_renderer, grid,  { "data/blue.png" }, SDL_Point{ WIDTH/2, HEIGHT/2 });
 }
 
 Game::~Game() {
@@ -47,8 +52,7 @@ void Game::preRender() {
 void Game::render() {
 	//draw stuff
 	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
-	int w, h;
-	SDL_GetWindowSize(_window, &w, &h);
+	_display.render(_renderer);
 }
 
 void Game::update() {

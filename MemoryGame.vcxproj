@@ -147,6 +147,7 @@
     <ClInclude Include="include\SDL2\SDL_version.h" />
     <ClInclude Include="include\SDL2\SDL_video.h" />
     <ClInclude Include="src\Game.hpp" />
+    <ClInclude Include="src\GridDisplay.hpp" />
     <ClInclude Include="src\RandomGrid.hpp" />
     <ClInclude Include="src\util.hpp" />
   </ItemGroup>
