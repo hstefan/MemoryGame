@@ -41,9 +41,6 @@ void GridDisplay<T>::feed(SDL_Renderer* render, const T& grid,
 	loadTextures(render, idSprites);
 	//we'll assume every textures are of the same size (by now :P)
 	SDL_Point topLeft;
-	/*topLeft.x = static_cast<int>(center.x - tw / 2 - (grid.width() % 2 * tw / 2));
-	topLeft.y = static_cast<int>(center.y - th / 2 - (grid.height() % 2 * th / 2));*/
-
 	topLeft.x = static_cast<int>(center.x - (tw * grid.width()) / 2);
 	topLeft.y = static_cast<int>(center.y - (th * grid.height()) / 2);
 
