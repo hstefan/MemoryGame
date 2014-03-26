@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <chrono>
 
 namespace game {
 
@@ -22,6 +23,7 @@ private:
 template <class T>
 RandomGrid<T>::RandomGrid() 
 	: _data(), _sx(0), _sy(0) {
+	std::srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
 }
 
 template <class T> 
