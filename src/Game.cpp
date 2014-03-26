@@ -16,8 +16,8 @@ Game::Game()
 	_renderer = SDL_CreateRenderer(_window, -1, 0);
 	
 	RandomGrid<int> grid;
-	grid.feed(8, 6);
-	_display.feed(_renderer, grid,  { "data/blue.png" }, SDL_Point{ WIDTH/2, HEIGHT/2 });
+	grid.feed(4, 4);
+	_display.feed(_renderer, grid, "data/bunnies/bunnies.txt", SDL_Point{ WIDTH/2, HEIGHT/2 });
 }
 
 Game::~Game() {
