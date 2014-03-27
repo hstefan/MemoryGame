@@ -21,7 +21,6 @@ template <class T>
 struct GridDisplay {
 	GridDisplay();
 	void feed(SDL_Renderer* render, const T& grid, const std::vector<std::string>& idSprites, const SDL_Point& center);
-	void feed(SDL_Renderer* render, const T& grid, const char* descFile, const SDL_Point& center);
 	void render(SDL_Renderer* render);
 	void loadTextures(SDL_Renderer* rend, const std::vector<std::string>& idSprites);
 private:
@@ -61,19 +60,6 @@ void GridDisplay<T>::feed(SDL_Renderer* render, const T& grid,
 			_cards.push_back(CardView{ grid.get(i, j), dst, src });
 		}
 	}
-}
-
-template <class T>
-void GridDisplay<T>::feed(SDL_Renderer* render, const T& grid, const char* descFile, const SDL_Point& center) {
-	std::vector<std::string> files;
-	std::fstream f(descFile);
-	if (f.is_open()) {
-		std::string tmp;
-		while (std::getline(f, tmp)) {
-			files.push_back(tmp);
-		}
-	}
-	feed(render, grid, files, center);
 }
 
 template <class T>
