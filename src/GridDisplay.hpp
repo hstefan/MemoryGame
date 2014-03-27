@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_surface.h>
 #include "RandomGrid.hpp"
+#include "LevelInfo.hpp"
 #include <fstream>
 #include <string>
 
