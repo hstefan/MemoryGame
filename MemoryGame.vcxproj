@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\LevelInfo.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClInclude Include="include\SDL2\SDL_video.h" />
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\GridDisplay.hpp" />
+    <ClInclude Include="src\LevelInfo.hpp" />
     <ClInclude Include="src\RandomGrid.hpp" />
     <ClInclude Include="src\util.hpp" />
   </ItemGroup>
