@@ -233,13 +233,13 @@
     <ClInclude Include="include\SDL2\SDL_video.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\RandomGrid.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\GridDisplay.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\LevelInfo.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GameGrid.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

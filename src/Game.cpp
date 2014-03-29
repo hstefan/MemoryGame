@@ -2,7 +2,7 @@
 
 #include "Game.hpp"
 #include "util.hpp"
-#include "RandomGrid.hpp"
+#include "GameGrid.hpp"
 #include "LevelInfo.hpp"
 
 using namespace game;
@@ -17,7 +17,7 @@ Game::Game()
 	_renderer = SDL_CreateRenderer(_window, -1, 0);
 	
 	LevelInfo info("Bunnies", "data/bunnies/bunnies.txt");
-	RandomGrid<int> grid;
+	GameGrid<int> grid;
 	grid.feed(info.width, info.height);
 	_display.feed(_renderer, grid, info.sprites, SDL_Point{ WIDTH/2, HEIGHT/2 });
 }

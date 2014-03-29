@@ -150,7 +150,7 @@
     <ClInclude Include="src\Game.hpp" />
     <ClInclude Include="src\GridDisplay.hpp" />
     <ClInclude Include="src\LevelInfo.hpp" />
-    <ClInclude Include="src\RandomGrid.hpp" />
+    <ClInclude Include="src\GameGrid.hpp" />
     <ClInclude Include="src\util.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

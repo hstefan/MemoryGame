@@ -7,9 +7,9 @@
 namespace game {
 
 template <class T>
-struct RandomGrid {
-	RandomGrid();
-	virtual ~RandomGrid();
+struct GameGrid {
+	GameGrid();
+	virtual ~GameGrid();
 	inline T& get(int i, int j);
 	inline const T& get(int i, int j) const;
 	void feed(size_t sx, size_t sy);
@@ -21,28 +21,28 @@ private:
 };
 
 template <class T>
-RandomGrid<T>::RandomGrid() 
+GameGrid<T>::GameGrid()
 	: _data(), _sx(0), _sy(0) {
 	std::srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
 }
 
 template <class T> 
-RandomGrid<T>::~RandomGrid() {
+GameGrid<T>::~GameGrid() {
 
 }
 
 template <class T>
-T& RandomGrid<T>::get(int i, int j) {
+T& GameGrid<T>::get(int i, int j) {
 	return _data[j * _sx + i];
 }
 
 template <class T>
-const T& RandomGrid<T>::get(int i, int j) const {
+const T& GameGrid<T>::get(int i, int j) const {
 	return _data[j * _sx + i];
 }
 
 template <class T>
-void RandomGrid<T>::feed(size_t sx, size_t sy) {
+void GameGrid<T>::feed(size_t sx, size_t sy) {
 	_data.clear();
 	_sx = sx;
 	_sy = sy;
@@ -64,12 +64,12 @@ void RandomGrid<T>::feed(size_t sx, size_t sy) {
 }
 
 template <class T>
-size_t RandomGrid<T>::width() const {
+size_t GameGrid<T>::width() const {
 	return _sx;
 }
 
 template <class T>
-size_t RandomGrid<T>::height() const {
+size_t GameGrid<T>::height() const {
 	return _sy;
 }
 

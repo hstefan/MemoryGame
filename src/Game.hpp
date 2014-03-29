@@ -23,7 +23,7 @@ private:
 
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
-	graphics::GridDisplay<RandomGrid<int>> _display;
+	graphics::GridDisplay<GameGrid<int>> _display;
 };
 
 }
