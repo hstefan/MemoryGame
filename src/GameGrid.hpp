@@ -16,6 +16,7 @@ struct GameGrid {
 	size_t width() const;
 	size_t height() const;
 private:
+	inline size_t hash(size_t i, size_t j) const;
 	std::vector<T> _data;
 	std::vector<bool> _revealed;
 	size_t _sx, _sy;
@@ -34,19 +35,22 @@ GameGrid<T>::~GameGrid() {
 }
 
 template <class T>
+size_t GameGrid<T>::hash(size_t i, size_t j) const {
+	return j * _sx + i;
+}
+
+template <class T>
 T& GameGrid<T>::get(int i, int j) {
-	int hash = j * _sx + i;
-	if (_revealed[hash])
-		return _data[hash];
+	if (_revealed[hash(i, j)])
+		return _data[hash(i, j)];
 	else
 		return _hiddenId;
 }
 
 template <class T>
 const T& GameGrid<T>::get(int i, int j) const {
-	int hash = j * _sx + i;
-	if (_revealed[hash])
-		return _data[hash];
+	if (_revealed[hash(i, j)])
+		return _data[hash(i, j)];
 	else
 		return _hiddenId;
 }
