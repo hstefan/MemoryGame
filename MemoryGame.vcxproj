@@ -80,6 +80,7 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\LevelInfo.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SDL2\begin_code.h" />
