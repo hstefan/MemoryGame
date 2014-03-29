@@ -15,6 +15,7 @@ struct GameGrid {
 	void feed(size_t sx, size_t sy);
 	size_t width() const;
 	size_t height() const;
+	void reveal(size_t i, size_t j);
 private:
 	inline size_t hash(size_t i, size_t j) const;
 	std::vector<T> _data;
@@ -86,6 +87,11 @@ size_t GameGrid<T>::width() const {
 template <class T>
 size_t GameGrid<T>::height() const {
 	return _sy;
+}
+
+template <class T>
+void GameGrid<T>::reveal(size_t i, size_t j) {
+	_revealed[hash(i, j)] = true;
 }
 
 }

@@ -19,6 +19,10 @@ Game::Game()
 	LevelInfo info("Bunnies", "data/bunnies/bunnies.txt");
 	GameGrid<int> grid(0);
 	grid.feed(info.width, info.height);
+	grid.reveal(0, 0);
+	grid.reveal(0, 1);
+	grid.reveal(0, 2);
+	grid.reveal(0, 3);
 	_display.feed(_renderer, grid, info.sprites, SDL_Point{ WIDTH/2, HEIGHT/2 });
 }
 
