@@ -102,7 +102,7 @@ template <class T>
 void GameGrid<T>::onClick(size_t i, size_t j) {
 	if (_revealBuff.size() >= 2) { //hide all cards
 		auto count = static_cast<size_t>(std::count_if(begin(_revealBuff), end(_revealBuff), 
-			[&](std::tuple<int, int> elem) {
+			[&](const std::tuple<int, int>& elem) {
 			return get(std::get<0>(elem), std::get<1>(elem)) ==
 				get(std::get<0>(_revealBuff[0]), std::get<1>(_revealBuff[0]));
 			}
