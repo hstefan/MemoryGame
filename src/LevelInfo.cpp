@@ -12,9 +12,6 @@ LevelInfo::LevelInfo(const char* levelName, const char* descFile)
 	std::ifstream f(descriptFile);
 	if (f.is_open()) {
 		std::string tmp;
-		if (std::getline(f, tmp)) { //first line represents the "hidden" card
-			hiddenSprite = tmp;
-		}
 		while (std::getline(f, tmp)) {
 			sprites.push_back(tmp);
 		}
