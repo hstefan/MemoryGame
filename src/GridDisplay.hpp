@@ -4,10 +4,10 @@
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_surface.h>
+#include <string>
+#include <iostream>
 #include "GameGrid.hpp"
 #include "LevelInfo.hpp"
-#include <fstream>
-#include <string>
 
 namespace graphics {
 
