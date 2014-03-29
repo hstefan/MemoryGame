@@ -1,3 +1,4 @@
+data/blue.png
 data/bunnies/black_white.png
 data/bunnies/brow_bed.png
 data/bunnies/hop_gray.png
