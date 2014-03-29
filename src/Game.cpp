@@ -36,10 +36,10 @@ void Game::run() {
 				running = false;
 			}
 		}
+		update();
 		preRender();
 		render();
 		SDL_RenderPresent(_renderer);
-
 		auto elapsed_time = SDL_GetTicks() - starting_time;
 		SDL_Delay(util::clamp(1000U / FPS - elapsed_time, 0U, 1000U / FPS));
 	}
@@ -58,6 +58,7 @@ void Game::render() {
 
 void Game::update() {
 	//update game objects
+	_grid.update();
 }
 
 bool Game::handleEvent(const SDL_Event& evt) {

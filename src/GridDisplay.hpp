@@ -27,6 +27,7 @@ struct GridDisplay {
 	void render(SDL_Renderer* render);
 	void loadTextures(SDL_Renderer* rend, const std::vector<std::string>& idSprites);
 	void handleEvent(const SDL_Event& evt);
+	void updateCards();
 private:
 	void unloadTextures();
 	std::vector<CardView> _cards;
@@ -101,11 +102,17 @@ void GridDisplay<T>::handleEvent(const SDL_Event& evt) {
 	if (evt.type == SDL_MOUSEBUTTONDOWN) {
 		for (auto& card : _cards) {
 			if (util::insideRect(card.dstRect, evt.button.x, evt.button.y)) {
-				_grid->reveal(card.i, card.j);
-				card.imageIndex = _grid->get(card.i, card.j);
+				_grid->onClick(card.i, card.j);
 			}
 		}
+		updateCards();
 	}
 }
 
+template <class T>
+void  GridDisplay<T>::updateCards() {
+	for (auto& card : _cards) {
+		card.imageIndex = _grid->get(card.i, card.j);
+	}
+}
 }
