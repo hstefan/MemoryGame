@@ -8,7 +8,7 @@ namespace game {
 
 template <class T>
 struct GameGrid {
-	GameGrid();
+	GameGrid(T hiddenId = T());
 	virtual ~GameGrid();
 	inline T& get(int i, int j);
 	inline const T& get(int i, int j) const;
@@ -17,12 +17,14 @@ struct GameGrid {
 	size_t height() const;
 private:
 	std::vector<T> _data;
+	std::vector<bool> _revealed;
 	size_t _sx, _sy;
+	T _hiddenId;
 };
 
 template <class T>
-GameGrid<T>::GameGrid()
-	: _data(), _sx(0), _sy(0) {
+GameGrid<T>::GameGrid(T hiddenId)
+	: _data(), _sx(0), _sy(0), _hiddenId(hiddenId) {
 	std::srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
 }
 
@@ -33,12 +35,20 @@ GameGrid<T>::~GameGrid() {
 
 template <class T>
 T& GameGrid<T>::get(int i, int j) {
-	return _data[j * _sx + i];
+	int hash = j * _sx + i;
+	if (_revealed[hash])
+		return _data[hash];
+	else
+		return _hiddenId;
 }
 
 template <class T>
 const T& GameGrid<T>::get(int i, int j) const {
-	return _data[j * _sx + i];
+	int hash = j * _sx + i;
+	if (_revealed[hash])
+		return _data[hash];
+	else
+		return _hiddenId;
 }
 
 template <class T>
@@ -61,6 +71,7 @@ void GameGrid<T>::feed(size_t sx, size_t sy) {
 	for (size_t i = 0; i < indices.size(); ++i) {
 		_data.push_back(data[indices[i]]);
 	}
+	_revealed.resize(_data.size(), false);
 }
 
 template <class T>

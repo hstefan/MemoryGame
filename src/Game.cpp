@@ -17,7 +17,7 @@ Game::Game()
 	_renderer = SDL_CreateRenderer(_window, -1, 0);
 	
 	LevelInfo info("Bunnies", "data/bunnies/bunnies.txt");
-	GameGrid<int> grid;
+	GameGrid<int> grid(0);
 	grid.feed(info.width, info.height);
 	_display.feed(_renderer, grid, info.sprites, SDL_Point{ WIDTH/2, HEIGHT/2 });
 }
