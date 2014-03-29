@@ -66,8 +66,8 @@ void GameGrid<T>::feed(size_t sx, size_t sy) {
 	for (size_t i = 0; i < sx * sy; ++i) {
 		indices.push_back(i);
 		if (i < sx * sy) {
-			data.push_back(i);
-			data.push_back(i);
+			data.push_back(i + 1);
+			data.push_back(i + 1);
 		}
 	}
 	std::random_shuffle(std::begin(indices), std::end(indices));
