@@ -8,7 +8,7 @@
 using namespace game;
 
 Game::Game() 
-	: _window(nullptr), _renderer(nullptr), _display() {
+	: _window(nullptr), _renderer(nullptr), _display(), _grid(0) {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	_window = SDL_CreateWindow("Memory Game",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
@@ -17,13 +17,12 @@ Game::Game()
 	_renderer = SDL_CreateRenderer(_window, -1, 0);
 	
 	LevelInfo info("Bunnies", "data/bunnies/bunnies.txt");
-	GameGrid<int> grid(0);
-	grid.feed(info.width, info.height);
-	grid.reveal(0, 0);
-	grid.reveal(0, 1);
-	grid.reveal(0, 2);
-	grid.reveal(0, 3);
-	_display.feed(_renderer, grid, info.sprites, SDL_Point{ WIDTH/2, HEIGHT/2 });
+	_grid.feed(info.width, info.height);
+	_grid.reveal(0, 0);
+	_grid.reveal(0, 1);
+	_grid.reveal(0, 2);
+	_grid.reveal(0, 3);
+	_display.feed(_renderer, _grid, info.sprites, SDL_Point{ WIDTH/2, HEIGHT/2 });
 }
 
 Game::~Game() {

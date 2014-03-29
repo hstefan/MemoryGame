@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GridDisplay.hpp"
+#include "GameGrid.hpp"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -9,6 +10,7 @@ union SDL_Event;
 namespace game {
 
 struct Game {
+	typedef GameGrid<int> GameGridType;
 	static const int WIDTH = 1024;
 	static const int HEIGHT = 768;
 	static const int FPS = 60;
@@ -23,7 +25,8 @@ private:
 
 	SDL_Window* _window;
 	SDL_Renderer* _renderer;
-	graphics::GridDisplay<GameGrid<int>> _display;
+	graphics::GridDisplay<GameGridType> _display;
+	GameGridType _grid;
 };
 
 }
