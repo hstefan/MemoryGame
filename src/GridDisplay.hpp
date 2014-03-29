@@ -8,6 +8,7 @@
 #include <iostream>
 #include "GameGrid.hpp"
 #include "LevelInfo.hpp"
+#include "util.hpp"
 
 namespace graphics {
 
@@ -15,19 +16,23 @@ struct CardView {
 	size_t imageIndex;
 	SDL_Rect dstRect;
 	SDL_Rect srcRect;
+	int i;
+	int j;
 };
 
 template <class T>
 struct GridDisplay {
 	GridDisplay();
-	void feed(SDL_Renderer* render, const T& grid, const std::vector<std::string>& idSprites, const SDL_Point& center);
+	void feed(SDL_Renderer* render, T* grid, const std::vector<std::string>& idSprites, const SDL_Point& center);
 	void render(SDL_Renderer* render);
 	void loadTextures(SDL_Renderer* rend, const std::vector<std::string>& idSprites);
+	void handleEvent(const SDL_Event& evt);
 private:
 	void unloadTextures();
 	std::vector<CardView> _cards;
 	std::vector<SDL_Texture*> _texes;
 	int tw, th;
+	T* _grid;
 };
 
 template <class T>
@@ -36,19 +41,20 @@ GridDisplay<T>::GridDisplay() {
 }
 
 template <class T>
-void GridDisplay<T>::feed(SDL_Renderer* render, const T& grid, 
+void GridDisplay<T>::feed(SDL_Renderer* render, T* grid, 
 	const std::vector<std::string>& idSprites, const SDL_Point& center) {
+	_grid = grid;
 	loadTextures(render, idSprites);
 	//we'll assume every textures are of the same size (by now :P)
 	SDL_Point topLeft;
-	topLeft.x = static_cast<int>(center.x - (tw * grid.width()) / 2);
-	topLeft.y = static_cast<int>(center.y - (th * grid.height()) / 2);
+	topLeft.x = static_cast<int>(center.x - (tw * _grid->width()) / 2);
+	topLeft.y = static_cast<int>(center.y - (th * _grid->height()) / 2);
 
 	SDL_Rect src;
 	SDL_Rect dst;
 
-	for (size_t i = 0; i < grid.width(); ++i) {
-		for (size_t j = 0; j < grid.height(); ++j) {
+	for (size_t i = 0; i < _grid->width(); ++i) {
+		for (size_t j = 0; j < _grid->height(); ++j) {
 			src.x = 0;
 			src.y = 0;
 			src.w = tw;
@@ -57,7 +63,7 @@ void GridDisplay<T>::feed(SDL_Renderer* render, const T& grid,
 			dst.y = topLeft.y + (j * th);
 			dst.w = tw;
 			dst.h = th;
-			_cards.push_back(CardView{ grid.get(i, j), dst, src });
+			_cards.push_back(CardView{ _grid->get(i, j), dst, src, i, j });
 		}
 	}
 }
@@ -88,6 +94,18 @@ void GridDisplay<T>::unloadTextures() {
 		SDL_DestroyTexture(tex);
 	}
 	_texes.clear();
+}
+
+template <class T>
+void GridDisplay<T>::handleEvent(const SDL_Event& evt) {
+	if (evt.type == SDL_MOUSEBUTTONDOWN) {
+		for (auto& card : _cards) {
+			if (util::insideRect(card.dstRect, evt.button.x, evt.button.y)) {
+				_grid->reveal(card.i, card.j);
+				card.imageIndex = _grid->get(card.i, card.j);
+			}
+		}
+	}
 }
 
 }

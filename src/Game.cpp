@@ -18,11 +18,7 @@ Game::Game()
 	
 	LevelInfo info("Bunnies", "data/bunnies/bunnies.txt");
 	_grid.feed(info.width, info.height);
-	_grid.reveal(0, 0);
-	_grid.reveal(0, 1);
-	_grid.reveal(0, 2);
-	_grid.reveal(0, 3);
-	_display.feed(_renderer, _grid, info.sprites, SDL_Point{ WIDTH/2, HEIGHT/2 });
+	_display.feed(_renderer, &_grid, info.sprites, SDL_Point{ WIDTH/2, HEIGHT/2 });
 }
 
 Game::~Game() {
@@ -66,6 +62,7 @@ void Game::update() {
 
 bool Game::handleEvent(const SDL_Event& evt) {
 	bool ret = true;
+	_display.handleEvent(evt);
 	switch (evt.type) {
 	case SDL_KEYDOWN:
 		if (evt.key.keysym.sym == SDLK_ESCAPE)
