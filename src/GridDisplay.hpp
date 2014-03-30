@@ -64,7 +64,7 @@ void GridDisplay<T>::feed(SDL_Renderer* render, T* grid,
 			dst.y = topLeft.y + (j * th);
 			dst.w = tw;
 			dst.h = th;
-			_cards.push_back(CardView{ _grid->get(i, j), dst, src, i, j });
+			_cards.push_back(CardView{ (*_grid)(i, j), dst, src, i, j });
 		}
 	}
 }
@@ -112,7 +112,7 @@ void GridDisplay<T>::handleEvent(const SDL_Event& evt) {
 template <class T>
 void  GridDisplay<T>::updateCards() {
 	for (auto& card : _cards) {
-		card.imageIndex = _grid->get(card.i, card.j);
+		card.imageIndex = (*_grid)(card.i, card.j);
 	}
 }
 }
