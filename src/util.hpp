@@ -1,5 +1,7 @@
 #pragma once
 
+#define RANGE(c) begin(c),end(c)
+
 struct SDL_Rect;
 
 namespace util
