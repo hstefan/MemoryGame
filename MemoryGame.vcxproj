@@ -77,8 +77,6 @@
     <Library Include="lib\x86\SDL2_image.lib" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\glm\detail\dummy.cpp" />
-    <ClCompile Include="include\glm\detail\glm.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\LevelInfo.cpp" />
     <ClCompile Include="src\main.cpp" />
