@@ -100,23 +100,30 @@ void GameGrid<T>::setReveal(size_t i, size_t j, bool revealed) {
 
 template <class T>
 void GameGrid<T>::onClick(size_t i, size_t j) {
-	if (_revealBuff.size() >= 2) { //hide all cards
-		auto count = static_cast<size_t>(std::count_if(begin(_revealBuff), end(_revealBuff), 
-			[&](const std::tuple<int, int>& elem) {
-			return get(std::get<0>(elem), std::get<1>(elem)) ==
-				get(std::get<0>(_revealBuff[0]), std::get<1>(_revealBuff[0]));
+	auto cardOnBuff = std::find_if(std::begin(_revealBuff), std::end(_revealBuff),
+		[&](const std::tuple<size_t, size_t>& elem)
+		{ return std::get<0>(elem) == i && std::get<1>(elem) == j; }
+	);
+	if (cardOnBuff == std::end(_revealBuff)) //this means the new card WASN'T already in the buffer
+	{
+		if (_revealBuff.size() >= 2) { //hide all cards
+			auto count = static_cast<size_t>(std::count_if(begin(_revealBuff), end(_revealBuff),
+				[&](const std::tuple<size_t, size_t>& elem) {
+				return get(std::get<0>(elem), std::get<1>(elem)) ==
+					get(std::get<0>(_revealBuff[0]), std::get<1>(_revealBuff[0]));
 			}
-		));
-		if (count < _revealBuff.size()) {
-			for (auto& c : _revealBuff) {
-				setReveal(std::get<0>(c), std::get<1>(c), false);
+			));
+			if (count < _revealBuff.size()) {
+				for (auto& c : _revealBuff) {
+					setReveal(std::get<0>(c), std::get<1>(c), false);
+				}
 			}
+			_revealBuff.clear();
 		}
-		_revealBuff.clear();
-	}
-	if (!_revealed[hash(i, j)]) {
-		_revealBuff.push_back(std::make_tuple(i, j));
-		setReveal(i, j, true);
+		if (!_revealed[hash(i, j)]) {
+			_revealBuff.push_back(std::make_tuple(i, j));
+			setReveal(i, j, true);
+		}
 	}
 }
 
