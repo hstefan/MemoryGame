@@ -19,6 +19,7 @@
     <Library Include="lib\x86\SDL2_image.lib" />
     <Library Include="lib\x86\SDL2main.lib" />
     <Library Include="lib\x86\SDL2test.lib" />
+    <Library Include="lib\x86\SDL2_ttf.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -678,6 +679,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\glm\vector_relational.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SDL2\SDL_ttf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

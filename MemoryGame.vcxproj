@@ -75,6 +75,7 @@
     <Library Include="lib\x86\SDL2main.lib" />
     <Library Include="lib\x86\SDL2test.lib" />
     <Library Include="lib\x86\SDL2_image.lib" />
+    <Library Include="lib\x86\SDL2_ttf.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
@@ -290,6 +291,7 @@
     <ClInclude Include="include\SDL2\SDL_thread.h" />
     <ClInclude Include="include\SDL2\SDL_timer.h" />
     <ClInclude Include="include\SDL2\SDL_touch.h" />
+    <ClInclude Include="include\SDL2\SDL_ttf.h" />
     <ClInclude Include="include\SDL2\SDL_types.h" />
     <ClInclude Include="include\SDL2\SDL_version.h" />
     <ClInclude Include="include\SDL2\SDL_video.h" />
