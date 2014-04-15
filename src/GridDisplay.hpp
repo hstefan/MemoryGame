@@ -16,8 +16,8 @@ struct CardView {
 	size_t imageIndex;
 	SDL_Rect dstRect;
 	SDL_Rect srcRect;
-	int i;
-	int j;
+	size_t i;
+	size_t j;
 };
 
 template <class T>
@@ -64,7 +64,7 @@ void GridDisplay<T>::feed(SDL_Renderer* render, T* grid,
 			dst.y = topLeft.y + (j * th);
 			dst.w = tw;
 			dst.h = th;
-			_cards.push_back(CardView{ (*_grid)(i, j), dst, src, i, j });
+			_cards.push_back(CardView{ static_cast<size_t>((*_grid)(i, j)), dst, src, i, j });
 		}
 	}
 }
