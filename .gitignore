@@ -3,6 +3,8 @@
 *.opensdf
 *.sdf
 *.db
+*.sln
+*.vcxproj
 /Debug
 /Release
 /tests
