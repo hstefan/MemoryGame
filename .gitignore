@@ -8,3 +8,7 @@
 /tests
 *.swp
 /downloads
+/Makefile
+/MemoryGame.make
+/bin
+/obj
