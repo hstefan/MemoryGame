@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "Game.hpp"
 #include "util.hpp"
@@ -7,14 +8,18 @@
 
 using namespace game;
 
-Game::Game() 
+SDL_Renderer* Game::Renderer = nullptr;
+
+Game::Game()
 	: _window(nullptr), _renderer(nullptr), _display(), _grid(0) {
 	SDL_Init(SDL_INIT_EVERYTHING);
+	TTF_Init();
 	_window = SDL_CreateWindow("Memory Game",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WIDTH, HEIGHT,
 		SDL_WINDOW_OPENGL);
 	_renderer = SDL_CreateRenderer(_window, -1, 0);
+	Game::Renderer = _renderer;
 	
 	LevelInfo info("Bunnies", "data/bunnies/bunnies.txt");
 	_grid.feed(info.width, info.height);

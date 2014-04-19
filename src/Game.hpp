@@ -11,6 +11,7 @@ namespace game {
 
 struct Game {
 	typedef GameGrid<int> GameGridType;
+	static SDL_Renderer* Renderer;
 	static const int WIDTH = 1024;
 	static const int HEIGHT = 768;
 	static const int FPS = 60;
