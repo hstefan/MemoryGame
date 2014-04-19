@@ -12,6 +12,7 @@ namespace ui {
 
 struct Font {
 	Font(const char* path, size_t px);
+	~Font();
 	TTF_Font* ttf_font;
 	const size_t px;
 };

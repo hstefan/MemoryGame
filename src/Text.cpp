@@ -11,7 +11,11 @@ Font::Font(const char* path, size_t px)
 	ttf_font = TTF_OpenFont(path, px);
 	if (ttf_font == nullptr) {
 		std::cout << "Failed to read " << path << std::endl << TTF_GetError() << std::endl;
-	}
+}
+
+Font::~Font() {
+	if (ttf_font != nullptr)
+		TTF_CloseFont(ttf_font);
 }
 
 SolidText::SolidText(Font* font)
