@@ -19,6 +19,7 @@ struct Font {
 
 struct SolidText {
 	SolidText(Font* font);
+	~SolidText();
 	void draw(SDL_Renderer* renderer);
 	void updateText(const std::string& text, const SDL_Color& color, const SDL_Point& point);
 private:

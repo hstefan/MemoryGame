@@ -9,7 +9,7 @@ namespace ui {
 Font::Font(const char* path, size_t px) 
 	: ttf_font(nullptr), px(px) {
 	ttf_font = TTF_OpenFont(path, px);
-	if (ttf_font == nullptr) {
+	if (ttf_font == nullptr)
 		std::cout << "Failed to read " << path << std::endl << TTF_GetError() << std::endl;
 }
 
@@ -21,6 +21,11 @@ Font::~Font() {
 SolidText::SolidText(Font* font)
 	: _texture(nullptr), _font(font) {
 	
+}
+
+SolidText::~SolidText() {
+	if (_texture != nullptr)
+		SDL_DestroyTexture(_texture);
 }
 
 void SolidText::updateText(const std::string& text, const SDL_Color& color, const SDL_Point& point) {
