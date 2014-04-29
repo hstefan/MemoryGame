@@ -10,6 +10,11 @@ struct SDL_Texture;
 
 namespace ui {
 
+enum class TextType {
+	Solid,
+	Blended,
+};
+
 struct Font {
 	Font(const char* path, size_t px);
 	~Font();
@@ -17,11 +22,13 @@ struct Font {
 	const size_t px;
 };
 
-struct SolidText {
-	SolidText(Font* font);
-	~SolidText();
+struct Text {
+	Text(TextType type, Font* font);
+	~Text();
 	void draw(SDL_Renderer* renderer);
 	void updateText(const std::string& text, const SDL_Color& color, const SDL_Point& point);
+	
+	const TextType type;
 private:
 	SDL_Texture* _texture;
 	Font* _font;
