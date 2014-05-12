@@ -12,7 +12,7 @@ using namespace game;
 SDL_Renderer* Game::Renderer = nullptr;
 
 Game::Game()
-	: _window(nullptr), _renderer(nullptr), _display(), _grid(0) {
+	: _window(nullptr), _renderer(nullptr), _display(), _grid(0), _state(GameState::WAITING) {
 	_window = SDL_CreateWindow("Memory Game",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WIDTH, HEIGHT,
@@ -57,17 +57,39 @@ void Game::preRender() {
 void Game::render() {
 	//draw stuff
 	SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255);
-	_display.render(_renderer);
+	if (_state == GameState::RUNNING) {
+		_display.render(_renderer);
+	} else {
+		_menu.render(_renderer);
+	}
 }
 
 void Game::update() {
 	//update game objects
-	_grid.update();
+	if (_state == GameState::RUNNING) {
+		_grid.update();
+		if (_grid.finished()) {
+			_state = GameState::WAITING;
+		}
+		_menu.reset();
+	} else {
+		_state = _menu.update(_state);
+		if (_state == GameState::RUNNING) //transition to "running" state
+		{
+			_grid.shuffle();
+			_grid.resetRevealed();
+			_display.updateCards();
+		}
+	}
 }
 
 bool Game::handleEvent(const SDL_Event& evt) {
 	bool ret = true;
-	_display.handleEvent(evt);
+	if (_state == GameState::RUNNING) {
+		_display.handleEvent(evt);
+	} else {
+		_menu.handleEvent(evt);
+	}
 	switch (evt.type) {
 	case SDL_KEYDOWN:
 		if (evt.key.keysym.sym == SDLK_ESCAPE)
@@ -78,4 +100,8 @@ bool Game::handleEvent(const SDL_Event& evt) {
 		break;
 	}
 	return ret;
+}
+
+GameState Game::state() const {
+	return _state;
 }

@@ -2,12 +2,15 @@
 
 #include "GridDisplay.hpp"
 #include "GameGrid.hpp"
+#include "Menu.hpp"
 
 struct SDL_Window;
 struct SDL_Renderer;
 union SDL_Event;
 
 namespace game {
+
+enum class GameState;
 
 struct Game {
 	typedef GameGrid<int> GameGridType;
@@ -21,6 +24,7 @@ struct Game {
 	void preRender();
 	void render();
 	void update();
+	GameState state() const;
 private:
 	bool handleEvent(const SDL_Event& evt);
 
@@ -28,6 +32,8 @@ private:
 	SDL_Renderer* _renderer;
 	graphics::GridDisplay<GameGridType> _display;
 	GameGridType _grid;
+	GameState _state;
+	ui::Menu _menu;
 };
 
 }
