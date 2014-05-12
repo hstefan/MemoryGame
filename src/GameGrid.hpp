@@ -23,6 +23,9 @@ struct GameGrid {
 	void update();
 	bool compareEqual(const std::tuple<size_t, size_t>& a, const std::tuple<size_t, size_t>& b);
 	bool compareEqual(size_t ia, size_t ja, size_t ib, size_t jb);
+	void shuffle();
+	void resetRevealed();
+	bool finished();
 private:
 	inline size_t hash(size_t i, size_t j) const;
 	std::vector<T> _data;
@@ -30,11 +33,12 @@ private:
 	std::vector<std::tuple<size_t, size_t>> _revealBuff;
 	size_t _sx, _sy;
 	T _hiddenId;
+	size_t _revealedCount;
 };
 
 template <class T>
 GameGrid<T>::GameGrid(T hiddenId)
-	: _data(), _sx(0), _sy(0), _hiddenId(hiddenId) {
+	: _data(), _sx(0), _sy(0), _hiddenId(hiddenId), _revealedCount(0) {
 	std::srand(static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count()));
 }
 
@@ -70,22 +74,25 @@ void GameGrid<T>::feed(size_t sx, size_t sy) {
 	_sx = sx;
 	_sy = sy;
 	_data.reserve(sx * sy);
-	std::vector<size_t> indices;
-	indices.resize(sx * sy, 0);
-	std::iota(RANGE(indices), 0);
-	
-	std::vector<size_t> data;
 
-	for (size_t i = 0; i < sx * sy; ++i) {
-		data.push_back(i + 1);
-		data.push_back(i + 1);
+	for (size_t i = 0; i < (sx * sy)/2; ++i) {
+		_data.push_back(i + 1);
+		_data.push_back(i + 1);
 	}
-	std::random_shuffle(RANGE(indices));
-	
-	for (auto i : indices) {
-		_data.push_back(data[i]);
-	}
+	shuffle();
+	resetRevealed();
+}
+
+template <class T>
+void GameGrid<T>::shuffle() {
+	std::random_shuffle(RANGE(_data));
+}
+
+template <class T>
+void GameGrid<T>::resetRevealed() {
 	_revealed.resize(_data.size(), false);
+	std::fill(RANGE(_revealed), false);
+	_revealedCount = 0;
 }
 
 template <class T>
@@ -101,6 +108,10 @@ size_t GameGrid<T>::height() const {
 template <class T>
 void GameGrid<T>::setReveal(size_t i, size_t j, bool revealed) {
 	_revealed[hash(i, j)] = revealed;
+	if (revealed) 
+		++_revealedCount;
+	else
+		--_revealedCount;
 }
 
 template <class T>
@@ -133,7 +144,11 @@ void GameGrid<T>::onClick(size_t i, size_t j) {
 
 template <class T>
 void GameGrid<T>::update() {
-	
+}
+
+template <class T>
+bool GameGrid<T>::finished() {
+	return _revealed.size() == _revealedCount;
 }
 
 template <class T>
