@@ -3,6 +3,7 @@
 #include "GridDisplay.hpp"
 #include "GameGrid.hpp"
 #include "Menu.hpp"
+#include "SoundManager.hpp"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -34,6 +35,7 @@ private:
 	GameGridType _grid;
 	GameState _state;
 	ui::Menu _menu;
+	sound::SoundManager _soundMan;
 };
 
 }

@@ -12,7 +12,7 @@ using namespace game;
 SDL_Renderer* Game::Renderer = nullptr;
 
 Game::Game()
-	: _window(nullptr), _renderer(nullptr), _display(), _grid(0), _state(GameState::WAITING) {
+	: _window(nullptr), _renderer(nullptr), _display(), _grid(0), _state(GameState::WAITING), _soundMan() {
 	_window = SDL_CreateWindow("Memory Game",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WIDTH, HEIGHT,
@@ -31,6 +31,7 @@ Game::~Game() {
 }
 
 void Game::run() {
+	_soundMan.music(true);
 	bool running = true;
 	SDL_Event evt;
 	while (running) {
