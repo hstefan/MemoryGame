@@ -23,5 +23,5 @@ solution "MemoryGame"
 		language "c++"
 		files { "src/**.cpp", "src/**.hpp", "src/**.c", "src/**.cpp" }
 		includedirs { "src" }
-		links { "SDL2", "SDL2_image", "SDL2_ttf" }
+		links { "SDL2", "SDL2_image", "SDL2_ttf", "SDL2_mixer" }
 
