@@ -13,7 +13,7 @@ SDL_Renderer* Game::Renderer = nullptr;
 
 Game::Game()
 	: _window(nullptr), _renderer(nullptr), _display(), _grid(0), _state(GameState::WAITING) {
-	_window = SDL_CreateWindow("Memory Game",
+	_window = SDL_CreateWindow("Tales of Matching Bunnies",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WIDTH, HEIGHT,
 		SDL_WINDOW_OPENGL);
