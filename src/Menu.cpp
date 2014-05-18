@@ -15,7 +15,12 @@ game::GameState Menu::update(game::GameState state) {
 		if (state == game::GameState::WAITING) {
 			_msg.updateText("CLICK TO CONTINUE",
 				SDL_Color { 255, 255, 255, 255 },
-				SDL_Point { 364, 290 });
+				SDL_Point { 0, 0 });
+			auto sz = _msg.size();
+			_msg.updateText(_msg.text(), 
+			   SDL_Color {255, 255, 255, 255 },
+			   SDL_Point { 320 - sz.first/2, 256 - sz.second/2 }
+			);
 		}
 		_init = true;
 	}

@@ -29,22 +29,20 @@ Text::~Text() {
 }
 
 void Text::updateText(const std::string& text, const SDL_Color& color, const SDL_Point& point) {
-	if (_text !=  text) {
-		_text = text;
-		if (_texture != nullptr)
-			SDL_DestroyTexture(_texture);
-		SDL_Surface* surf = nullptr;
-		if (type == TextType::Solid) {
-			surf = TTF_RenderUTF8_Solid(_font->ttf_font, text.c_str(), color);
-		} else if (type == TextType::Blended) {
-			surf = TTF_RenderUTF8_Blended(_font->ttf_font, text.c_str(), color);
-		}
-		if (surf != nullptr) {
-			_texture = SDL_CreateTextureFromSurface(game::Game::Renderer, surf);
-			_srcRect = { 0, 0, surf->w, surf->h };
-			_dstRect = { point.x, point.y, surf->w, surf->h };
-			SDL_FreeSurface(surf);
-		}
+	_text = text;
+	if (_texture != nullptr)
+		SDL_DestroyTexture(_texture);
+	SDL_Surface* surf = nullptr;
+	if (type == TextType::Solid) {
+		surf = TTF_RenderUTF8_Solid(_font->ttf_font, text.c_str(), color);
+	} else if (type == TextType::Blended) {
+		surf = TTF_RenderUTF8_Blended(_font->ttf_font, text.c_str(), color);
+	}
+	if (surf != nullptr) {
+		_texture = SDL_CreateTextureFromSurface(game::Game::Renderer, surf);
+		_srcRect = { 0, 0, surf->w, surf->h };
+		_dstRect = { point.x, point.y, surf->w, surf->h };
+		SDL_FreeSurface(surf);
 	}
 }
 
