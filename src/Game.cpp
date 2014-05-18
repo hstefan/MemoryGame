@@ -12,14 +12,14 @@ using namespace game;
 SDL_Renderer* Game::Renderer = nullptr;
 
 Game::Game()
-	: _window(nullptr), _renderer(nullptr), _display(), _grid(0), _state(GameState::WAITING), _soundMan() {
+	: _window(nullptr), _renderer(nullptr), _display(), _grid(0), _state(GameState::WAITING) {
 	_window = SDL_CreateWindow("Memory Game",
 		SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
 		WIDTH, HEIGHT,
 		SDL_WINDOW_OPENGL);
 	_renderer = SDL_CreateRenderer(_window, -1, 0);
 	Game::Renderer = _renderer;
-	
+	sound::SoundManager::instance().init();
 	LevelInfo info("Bunnies", "data/bunnies/bunnies.txt");
 	_grid.feed(info.width, info.height);
 	_display.feed(_renderer, &_grid, info.sprites, SDL_Point{ WIDTH/2, HEIGHT/2 });
@@ -31,7 +31,7 @@ Game::~Game() {
 }
 
 void Game::run() {
-	_soundMan.music(true);
+	sound::SoundManager::instance().music(true);
 	bool running = true;
 	SDL_Event evt;
 	while (running) {

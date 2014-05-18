@@ -35,7 +35,6 @@ private:
 	GameGridType _grid;
 	GameState _state;
 	ui::Menu _menu;
-	sound::SoundManager _soundMan;
 };
 
 }

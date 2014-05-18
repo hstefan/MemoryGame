@@ -6,6 +6,7 @@
 #include <tuple>
 #include <numeric>
 #include "util.hpp"
+#include "SoundManager.hpp"
 
 namespace game {
 
@@ -122,6 +123,7 @@ void GameGrid<T>::onClick(size_t i, size_t j) {
 	);
 	if (!cardOnBuff) //this means the new card WASN'T already in the buffer
 	{
+		sound::SoundManager::instance().oneFlip();
 		if (_revealBuff.size() >= 2) { //hide all cards
 			auto count = static_cast<size_t>(std::count_if(RANGE(_revealBuff),
 				[&](const std::tuple<size_t, size_t>& elem) {
