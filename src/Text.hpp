@@ -4,6 +4,7 @@
 #include <SDL2/SDL_pixels.h>
 #include <SDL2/SDL_rect.h>
 #include <SDL2/SDL_ttf.h>
+#include <utility>
 
 struct SDL_Renderer;
 struct SDL_Texture;
@@ -27,8 +28,9 @@ struct Text {
 	~Text();
 	void draw(SDL_Renderer* renderer);
 	void updateText(const std::string& text, const SDL_Color& color, const SDL_Point& point);
-	
 	const TextType type;
+	std::pair<int, int> size();
+	std::string text() const;
 private:
 	SDL_Texture* _texture;
 	Font* _font;

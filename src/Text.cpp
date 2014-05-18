@@ -52,4 +52,14 @@ void Text::draw(SDL_Renderer* renderer) {
 	SDL_RenderCopy(renderer, _texture, &_srcRect, &_dstRect);
 }
 
+std::pair<int, int> Text::size() {
+	auto p = std::make_pair(0, 0);
+	TTF_SizeText(_font->ttf_font, _text.c_str(), &p.first, &p.second);
+	return p;
+}
+
+std::string Text::text() const {
+	return _text;
+}
+
 } //namespace ui
