@@ -16,8 +16,8 @@ enum class GameState;
 struct Game {
 	typedef GameGrid<int> GameGridType;
 	static SDL_Renderer* Renderer;
-	static const int WIDTH = 1024;
-	static const int HEIGHT = 768;
+	static const int WIDTH = 640;
+	static const int HEIGHT = 512;
 	static const int FPS = 60;
 	Game();
 	~Game();
